@@ -25,6 +25,8 @@ class SongsService {
    */
   async getMySongs() {
     //TODO What are you going to do with this result
+    let res = await sandBoxApi.get('')
+    ProxyState.songs = res.data.map(s=> new Song(s))
   }
 
   /**
@@ -45,7 +47,16 @@ class SongsService {
   removeSong(id) {
     //TODO Send the id to be deleted from the server then update the store
   }
+
+setActive(id){
+  console.log(id)
+  let song = ProxyState.songs.find(s=> s._id === id)
+  ProxyState.activeSong = song
+}  
+
 }
+
+
 
 const service = new SongsService();
 export default service;
